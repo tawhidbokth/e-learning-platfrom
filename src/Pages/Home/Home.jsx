@@ -18,9 +18,6 @@ const Home = () => {
       <CourseCategories></CourseCategories>
       <PopularCourses></PopularCourses>
       <FreeCoursesTrial></FreeCoursesTrial>
-      <LiveClassesLatestUpdates></LiveClassesLatestUpdates>
-      <Instructors></Instructors>
-      <SubscriptionPlans></SubscriptionPlans>
       <StudentReviews></StudentReviews>
       <FAQSupport></FAQSupport>
       <NewsletterSubscription></NewsletterSubscription>
