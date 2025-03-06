@@ -54,11 +54,12 @@ const Navbar = () => {
           <a>Payment History</a>
         </li>
       </NavLink>
-      <NavLink to={'/admindashboard'}>
-        <li>
-          <a>Admin</a>
-        </li>
-      </NavLink>
+
+      <li className="my-2 lg:my-0 lg:mx-4">
+        <NavLink to="/dashboard" className="hover:text-orange-500">
+          Dashboard
+        </NavLink>
+      </li>
     </>
   );
 

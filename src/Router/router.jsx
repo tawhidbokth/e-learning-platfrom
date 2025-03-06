@@ -13,6 +13,16 @@ import SubscriptionPlans from '../Components/SubscriptionPlans';
 import Contact from '../Pages/Contact';
 import PaymentHistoryPage from '../Pages/PaymentHistoryPage';
 import AdminDashboard from '../Pages/AdminDashboard';
+import Dashboard from '../Layout/Dashboard';
+import WellcomePage from '../Dashboard/Components/WellcomePage';
+import Students from '../Dashboard/Components/Students';
+import AddCourses from '../Dashboard/Components/AddCourses';
+import BlogPost from '../Dashboard/Components/BlogPost';
+import MyCourse from '../Dashboard/Components/MyCourse';
+import CategoryInput from '../Dashboard/Components/AddCategory';
+import AddInstractor from '../Dashboard/Components/AddInstractor';
+import FreeCourseManagement from '../Dashboard/Components/AddFreeCourse';
+import PricingManagement from '../Dashboard/Components/PricingManagement';
 
 const router = createBrowserRouter([
   {
@@ -71,6 +81,53 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login></Login>,
+      },
+    ],
+  },
+
+  {
+    path: 'dashboard',
+    element: <Dashboard></Dashboard>,
+
+    children: [
+      {
+        path: 'overveiw',
+        element: <WellcomePage></WellcomePage>,
+      },
+
+      {
+        path: 'students',
+        element: <Students></Students>,
+      },
+
+      {
+        path: 'addcourses',
+        element: <AddCourses></AddCourses>,
+      },
+
+      {
+        path: 'mycourses',
+        element: <MyCourse></MyCourse>,
+      },
+      {
+        path: 'blogpost',
+        element: <BlogPost></BlogPost>,
+      },
+      {
+        path: 'addcategory',
+        element: <CategoryInput></CategoryInput>,
+      },
+      {
+        path: 'instractor',
+        element: <AddInstractor></AddInstractor>,
+      },
+      {
+        path: 'freecourse',
+        element: <FreeCourseManagement></FreeCourseManagement>,
+      },
+      {
+        path: 'priceing',
+        element: <PricingManagement></PricingManagement>,
       },
     ],
   },
