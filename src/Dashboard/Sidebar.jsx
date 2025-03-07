@@ -26,7 +26,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 bg-gray-800 text-white w-64 min-h-screen p-6 transform transition-transform duration-300 ease-in-out ${
+        className={` inset-y-0 left-0 bg-gray-800 text-white w-64 min-h-screen p-6 transform transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } md:translate-x-0`}
       >
@@ -41,6 +41,43 @@ const Sidebar = () => {
                 }`}
               >
                 Dashboard
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/dashboard/paymenthistory"
+                className={`block py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300 ${
+                  location.pathname === '/dashboard/paymenthistory'
+                    ? 'bg-gray-700'
+                    : ''
+                }`}
+              >
+                Payment History
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/myclass"
+                className={`block py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300 ${
+                  location.pathname === '/dashboard/myclass'
+                    ? 'bg-gray-700'
+                    : ''
+                }`}
+              >
+                My Class
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard/profile"
+                className={`block py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300 ${
+                  location.pathname === '/dashboard/profile'
+                    ? 'bg-gray-700'
+                    : ''
+                }`}
+              >
+                Profile
               </Link>
             </li>
             <li>
@@ -91,7 +128,6 @@ const Sidebar = () => {
                 Blog Post
               </Link>
             </li>
-
             <li>
               <Link
                 to="/Dashboard/addcategory"
@@ -126,7 +162,6 @@ const Sidebar = () => {
                 Instractor
               </Link>
             </li>
-
             <li>
               <Link
                 to="/Dashboard/priceing"
@@ -139,7 +174,6 @@ const Sidebar = () => {
                 Priceing
               </Link>
             </li>
-
             <li>
               <Link
                 to="/"

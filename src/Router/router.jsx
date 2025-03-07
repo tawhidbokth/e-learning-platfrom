@@ -23,6 +23,9 @@ import CategoryInput from '../Dashboard/Components/AddCategory';
 import AddInstractor from '../Dashboard/Components/AddInstractor';
 import FreeCourseManagement from '../Dashboard/Components/AddFreeCourse';
 import PricingManagement from '../Dashboard/Components/PricingManagement';
+import MyClass from '../Dashboard/StudentDashboard/Components/MyClass';
+import PaymentHistory from '../Dashboard/StudentDashboard/Components/PaymentHistory';
+import Profile from '../Dashboard/StudentDashboard/Components/Profile';
 
 const router = createBrowserRouter([
   {
@@ -128,6 +131,18 @@ const router = createBrowserRouter([
       {
         path: 'priceing',
         element: <PricingManagement></PricingManagement>,
+      },
+      {
+        path: 'myclass',
+        element: <MyClass></MyClass>,
+      },
+      {
+        path: 'paymenthistory',
+        element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: 'profile',
+        element: <Profile></Profile>,
       },
     ],
   },

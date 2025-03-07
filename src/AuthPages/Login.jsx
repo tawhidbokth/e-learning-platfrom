@@ -1,63 +1,130 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaGoogle } from 'react-icons/fa';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from './../Provider/AuthProvider';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const from = location.state || '/';
 
-  const handleSubmit = e => {
+  const handlelogin = e => {
     e.preventDefault();
-    // Add login logic here
-    console.log('Login with:', email, password);
+    const emailInput = e.target.email.value;
+    const password = e.target.password.value;
+    setEmail(emailInput);
+
+    signInUser(emailInput, password)
+      .then(result => {
+        toast.success('Login Successful!', {
+          position: 'top-center',
+          autoClose: 2000,
+        });
+
+        setTimeout(() => {
+          navigate(from);
+        }, 2000);
+      })
+      .catch(error => {
+        const errorMessage = error?.message || 'Something went wrong!';
+        toast.error(errorMessage, {
+          position: 'top-center',
+          autoClose: 2000,
+        });
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then(result => {
+        toast.success('Google Login Successful!', {
+          position: 'top-center',
+          autoClose: 2000,
+        });
+
+        setTimeout(() => {
+          navigate(from);
+          toast.dismiss();
+        }, 2000);
+      })
+      .catch(error => {
+        const errorMessage = error?.message || 'Google Login Failed!';
+        toast.error(errorMessage, {
+          position: 'top-center',
+          autoClose: 2000,
+        });
+      });
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-gray-700 mb-2" htmlFor="email">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your email"
-              required
-            />
+    <div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="max-w-md w-full p-6 bg-white shadow-md rounded-lg">
+          <div className="text-center lg:text-left">
+            <h1 className="text-3xl font-bold">Login now!</h1>
           </div>
-          <div>
-            <label className="block text-gray-700 mb-2" htmlFor="password">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your password"
-              required
-            />
+          <div className="mb-4">
+            <form onSubmit={handlelogin} className="card-body">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="email"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                  required
+                />
+                <label className="label">
+                  <Link
+                    to="/forgot-password"
+                    state={{ email }}
+                    className="label-text-alt link link-hover text-blue-700"
+                  >
+                    Forgot password?
+                  </Link>
+                </label>
+              </div>
+              <div className="form-control mt-6">
+                <button className="btn btn-primary">Login</button>
+              </div>
+            </form>
+            <p className="ml-4 mb-4">
+              New to this website? Please{' '}
+              <Link to="/register">
+                <span className="text-blue-700 font-bold">Register</span>
+              </Link>
+            </p>
+            <p className="border">
+              <button
+                onClick={handleGoogleSignIn}
+                className="btn btn-ghost w-full"
+              >
+                <FaGoogle />
+                <span>Login with Google</span>
+              </button>
+            </p>
           </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition duration-300"
-          >
-            Login
-          </button>
-        </form>
-        <p className="text-center mt-6">
-          Don't have an account?{' '}
-          <Link to="/signup" className="text-blue-500 hover:underline">
-            Sign up
-          </Link>
-        </p>
+        </div>
       </div>
+
+      <ToastContainer />
     </div>
   );
 };
